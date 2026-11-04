@@ -34,7 +34,7 @@ figcaption { color: var(--muted); font-size: 1rem; text-align: center; line-heig
 .download-section { background: #f7f8fa; }
 .download-intro { color: var(--muted); }
 .table-container { max-width: 950px; margin: 2.5rem auto 0; overflow-x: auto; }
-.dataset-table { background: transparent; font-size: 1rem; }
+.dataset-table { background: transparent; font-size: 1.125rem; }
 .dataset-table td, .dataset-table th { padding: 1.15rem .9rem; border-color: #dce1e7; vertical-align: middle; white-space: nowrap; }
 .dataset-table thead th { color: var(--muted); font-size: .9rem; font-weight: 600; border-width: 0 0 1px; }
 .dataset-table tbody th { font-weight: 550; }
@@ -65,7 +65,7 @@ pre code { padding: 0; color: #33485d; background: transparent; font-size: inher
   .dataset-stats dt { font-size: 1.85rem; }
   .scene-labels { font-size: .9rem; margin-bottom: .6rem; }
   .method-figure { padding: 1.25rem .6rem; }
-  .dataset-table { font-size: 1rem; }
+  .dataset-table { font-size: 1.125rem; }
   .dataset-table td, .dataset-table th { padding: .95rem .55rem; }
   .table-container { margin-left: -.2rem; margin-right: -.2rem; }
   figcaption { font-size: 1rem; }
@@ -82,4 +82,4 @@ pre code { padding: 0; color: #33485d; background: transparent; font-size: inher
 .citation-section pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 .dataset-nav { padding: 2rem 1.5rem; font-size: 1rem; }
 .dataset-page .download-section { background: white; padding-top: 2rem; min-height: 65vh; }
-.dataset-terms { color: var(--muted); font-size: 1rem; margin-top: 2rem; }
+.dataset-terms { color: #363636; font-size: 1.125rem; margin-top: 2rem; }
