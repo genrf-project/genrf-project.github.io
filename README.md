@@ -1,6 +1,6 @@
 # GenRF
 
-Anonymous project website and data release for GenRF.
+Project website and data release for GenRF.
 
 The dataset contains 121,363 measured radio-field scenes and is released under CC BY 4.0. Download the archives from the Dataset page.
 
