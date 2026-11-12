@@ -46,7 +46,7 @@ When using the dataset, credit the GenRF dataset contributors, link to the [data
 ```bibtex
 @inproceedings{genrf2027,
   title = {{GenRF}: Reconstruct Any Radio Field in a Feed-Forward Process},
-  author = {{Anonymous Authors}},
+  author = {Shen Wang and Guosheng Wang and Junyang Liu and Lei Yang},
   booktitle = {Proceedings of ACM SenSys},
   year = {2027}
 }
