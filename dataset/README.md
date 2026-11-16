@@ -33,7 +33,7 @@ The scene-construction script retains scenes with more than 0.1% measured cells 
 
 ## Evaluation splits
 
-The scene corpus does not include the paper's fixed train/test or evaluation-mask manifests. Cross-scene evaluation should use geographically separated regions with non-overlapping footprints between splits.
+Researchers can use the dataset to design and compare different scene splits for training and evaluation.
 
 ## Attribution and terms
 
