@@ -2,12 +2,12 @@
 
 GenRF provides 121,363 measured urban radio-field scenes for cross-scene learning and evaluation. The main corpus contains China Mobile 5G NR n41 RSRP measurements from Shenzhen, China, organized into scenes at three spatial scales.
 
-| Scene size | Scenes | Array shape | Sliding step |
-| --- | ---: | --- | --- |
-| 100 m × 100 m | 91,902 | 100 × 100 | 50 m |
-| 300 m × 300 m | 20,755 | 300 × 300 | 150 m |
-| 500 m × 500 m | 8,706 | 500 × 500 | 250 m |
-| Total | 121,363 | | |
+| Scene size | Scenes | Array shape |
+| --- | ---: | --- |
+| 100 m × 100 m | 91,902 | 100 × 100 |
+| 300 m × 300 m | 20,755 | 300 × 300 |
+| 500 m × 500 m | 8,706 | 500 × 500 |
+| Total | 121,363 | |
 
 GenRF organizes vehicular radio measurements into a multi-scale scene corpus and prepares sparse observation–target pairs for learning across scenes.
 
@@ -27,13 +27,13 @@ RSRP_dBm = -144 + intensity / 255 × 104
 
 The original export averages measurements in each occupied cell, clips RSRP to [−144, −40] dBm, normalizes it, and converts it to `uint8`. The quantization step is approximately 0.408 dB. PNG files do not store a separate validity mask; zero is also the encoding's lower endpoint. This release contains the processed, quantized representation; it does not contain the raw measurement logs.
 
-Filenames retain the original form `grid_n41_300m_stephalf_x242_y79.png`. For side length `L`, a scene's local footprint is `[gx × L/2, gx × L/2 + L)` by `[gy × L/2, gy × L/2 + L)`. Columns run from west to east and rows from north to south. The indices locate scenes relative to the preprocessing origin; the archives contain no absolute-coordinate lookup table.
+Filenames encode the scene size and grid indices. Columns run from west to east and rows from north to south. The indices locate scenes relative to the preprocessing origin; the archives contain no absolute-coordinate lookup table.
 
 The scene-construction script retains scenes with more than 0.1% measured cells before intensity quantization.
 
 ## Evaluation splits
 
-The scene corpus does not include the paper's fixed train/test or evaluation-mask manifests. Neighboring scenes overlap because the sliding step is half the scene size; scenes at different scales also cover shared areas. Cross-scene evaluation should use geographically separated regions with non-overlapping footprints between splits.
+The scene corpus does not include the paper's fixed train/test or evaluation-mask manifests. Cross-scene evaluation should use geographically separated regions with non-overlapping footprints between splits.
 
 ## Attribution and terms
 
