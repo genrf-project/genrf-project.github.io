@@ -15,6 +15,13 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="stylesheet" href="assets/bulma.min.css">
   <link rel="stylesheet" href="assets/site.css?v=20261104">
+  <style>
+    .dataset-table .download-count { text-align: right; font-variant-numeric: tabular-nums; }
+    @media (max-width: 600px) {
+      .dataset-table { font-size: 1rem; }
+      .dataset-table td, .dataset-table th { padding-inline: .4rem; }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -29,11 +36,11 @@
         <div class="table-container">
           <table class="table is-fullwidth dataset-table">
             <caption class="sr-only">Download archives for each scene scale</caption>
-            <thead><tr><th scope="col">Scene size</th><th scope="col">Scenes</th><th scope="col">Format</th><th scope="col">Archive</th><th scope="col"><span class="sr-only">Download link</span></th></tr></thead>
+            <thead><tr><th scope="col">Scene size</th><th scope="col">Scenes</th><th scope="col">Format</th><th scope="col">Archive</th><th scope="col" class="download-count">Downloads</th><th scope="col"><span class="sr-only">Download link</span></th></tr></thead>
             <tbody>
-              <tr><th scope="row">100 m × 100 m</th><td>91,902</td><td>Grayscale PNG</td><td data-size="100">ZIP · 44.5 MB</td><td><a href="https://github.com/genrf-project/genrf-project.github.io/releases/download/dataset-v1.0/genrf-n41-100m.zip" aria-label="Download 100-meter scenes">Download <span aria-hidden="true">↓</span></a></td></tr>
-              <tr><th scope="row">300 m × 300 m</th><td>20,755</td><td>Grayscale PNG</td><td data-size="300">ZIP · 27.2 MB</td><td><a href="https://github.com/genrf-project/genrf-project.github.io/releases/download/dataset-v1.0/genrf-n41-300m.zip" aria-label="Download 300-meter scenes">Download <span aria-hidden="true">↓</span></a></td></tr>
-              <tr><th scope="row">500 m × 500 m</th><td>8,706</td><td>Grayscale PNG</td><td data-size="500">ZIP · 23.1 MB</td><td><a href="https://github.com/genrf-project/genrf-project.github.io/releases/download/dataset-v1.0/genrf-n41-500m.zip" aria-label="Download 500-meter scenes">Download <span aria-hidden="true">↓</span></a></td></tr>
+              <tr><th scope="row">100 m × 100 m</th><td>91,902</td><td>Grayscale PNG</td><td data-size="100">ZIP · 44.5 MB</td><td data-download-asset="genrf-n41-100m.zip" class="download-count">—</td><td><a href="https://github.com/genrf-project/genrf-project.github.io/releases/download/dataset-v1.0/genrf-n41-100m.zip" aria-label="Download 100-meter scenes">Download <span aria-hidden="true">↓</span></a></td></tr>
+              <tr><th scope="row">300 m × 300 m</th><td>20,755</td><td>Grayscale PNG</td><td data-size="300">ZIP · 27.2 MB</td><td data-download-asset="genrf-n41-300m.zip" class="download-count">—</td><td><a href="https://github.com/genrf-project/genrf-project.github.io/releases/download/dataset-v1.0/genrf-n41-300m.zip" aria-label="Download 300-meter scenes">Download <span aria-hidden="true">↓</span></a></td></tr>
+              <tr><th scope="row">500 m × 500 m</th><td>8,706</td><td>Grayscale PNG</td><td data-size="500">ZIP · 23.1 MB</td><td data-download-asset="genrf-n41-500m.zip" class="download-count">—</td><td><a href="https://github.com/genrf-project/genrf-project.github.io/releases/download/dataset-v1.0/genrf-n41-500m.zip" aria-label="Download 500-meter scenes">Download <span aria-hidden="true">↓</span></a></td></tr>
             </tbody>
           </table>
         </div>
@@ -46,5 +53,28 @@
     </section>
   </main>
   <footer class="footer"><div class="container has-text-centered"><p>GenRF</p><p class="template-credit">Website adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p></div></footer>
+  <script>
+    (async function showDownloadCounts() {
+      try {
+        const response = await fetch(
+          'https://api.github.com/repos/genrf-project/genrf-project.github.io/releases/tags/dataset-v1.0',
+          { signal: AbortSignal.timeout(6000) }
+        );
+        if (!response.ok) return;
+
+        const { assets } = await response.json();
+        const counts = new Map(assets.map(asset => [asset.name, asset.download_count]));
+        const formatter = new Intl.NumberFormat('en');
+        for (const cell of document.querySelectorAll('[data-download-asset]')) {
+          const count = counts.get(cell.dataset.downloadAsset);
+          if (Number.isSafeInteger(count) && count >= 0) {
+            cell.textContent = formatter.format(count);
+          }
+        }
+      } catch {
+        // Leave counts unavailable when GitHub cannot be reached.
+      }
+    })();
+  </script>
 </body>
 </html>
